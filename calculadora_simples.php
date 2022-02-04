@@ -1,4 +1,22 @@
 <?php
+// importação !
+// include ou require - permite fazer a importação de arquivos no PHP
+//Utilizando a opçao com _once, o servidor realiza uma restrição para
+//importar somente uma vez o arquivo (melhor opção)
+
+// include()
+// include_onde()
+// Diferença entre elas 
+
+// require()
+// require_once()
+
+//import do arquivo de configuraçoes 
+	 require_once('modulo/config.php');
+//import do arquivo de funçoes para calculos matematicos
+	require_once('modulo/calculos.php');
+	
+
 	//Declaração de variaveis
 	$valor1 = (double) 0;
 	$valor2 = (double) 0;
@@ -6,36 +24,7 @@
 	$opçao = (string) null;
 
 
-	//Criaçao de uma funçao para realizar as operaçoes matematicas
-	function operaçaoMatematica($numero1, $numero2, $operaçao){
-		$num1 = (double) $numero1;
-		$num2 = (double) $numero2;
-		$tipodeCalculo =(String) $operaçao;
-		$result = (double) 0;
-
-		switch($tipodeCalculo){
-			case "SOMAR":
-			$result = $num1 + $num2;
-			break;
-			case "MULTIPLICAR":
-			$result = $num1 * $num2;
-			break;
-			case'SUBTRAIR':
-			$result = $num1 - $num2;
-			break;
-			default:
-			if($num2 == 0)
-			echo '<script> alert("não é possivel fazer divisão com o valor 0 ");</script>';
-			else	
-			$result = $num1 / $num2;
-			break;
-			
-		}
-		$result = round($result, 2);
-
-	return $result;	
-		 
-	}
+	
 	
 
 
@@ -76,17 +65,17 @@
 		//tiver um comando só dentro do if e elseif se tiver mais de um da erro !!
 
 		if($_POST['txtn1'] == '' || $_POST['txtn2'] == ''){
-			echo ('<script> alert("ERRO!! preencher todas as mensagens"); </script>');
+			echo (ERRO_MSG_CAIXA_VAZIA);
 
 		}else
 		{
 				//validaçao de tratamento de erro para rdo sem escolha
 				if(!isset($_POST['rdocalc']))
-				echo '<script>alert("ERRO! Selecione uma opção matematica"); </script>';
+				echo (ERRO_MSG_OPERAÇAO_CALCULO);
 
 				else{
 					if(!is_numeric($valor1) || !is_numeric($valor2))
-					echo '<script>alert("Não é possivel de realizar calculos que não sejam numeros");</script>';
+					echo (ERRO_MSG_CARACTER_DO_NUMERO);
 					else{
 					
 							//vai comverter tudo que chegar em maiusculo para nao der erro caso o cara do front faça
@@ -166,4 +155,3 @@
 	</body>
 
 </html>
-
